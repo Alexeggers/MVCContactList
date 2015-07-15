@@ -7,6 +7,19 @@ public class Contact {
 	private String phonenumber;
 	private String notes;
 	
+	public Contact(String id, String name, String phonenumber, String notes) {
+		this.id = id;
+		this.name = name;
+		this.phonenumber = phonenumber;
+		this.notes = notes;
+	}
+	
+	public Contact(String name, String phonenumber, String notes) {
+		this.name = name;
+		this.phonenumber = phonenumber;
+		this.notes = notes;
+	}
+	
 	public String getId() {
 		return id;
 	}
