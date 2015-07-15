@@ -1,7 +1,6 @@
 package de.xailabs.mvccontactlist;
 
 public class Contact {
-	
 	private String id;
 	private String name;
 	private String phonenumber;
