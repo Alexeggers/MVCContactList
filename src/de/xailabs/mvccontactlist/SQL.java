@@ -54,9 +54,6 @@ public class SQL {
 				String id = Integer.toString(rs.getInt("ID"));
 				String name = rs.getString("Name");
 				String number = rs.getString("Phonenumber");
-				if (number == null) {
-					number = "";
-				}
 				String notes = rs.getString("Notes");
 				Contact contact = new Contact(id, name, number, notes);
 				foundContacts.add(contact);

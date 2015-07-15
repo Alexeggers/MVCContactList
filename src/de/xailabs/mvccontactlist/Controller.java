@@ -4,7 +4,8 @@ import java.util.Vector;
 
 public class Controller {
 	
-	SQL connection = new SQL();
+	private SQL connection;
+	private View view;
 	
 	public Vector<Vector<String>> convertToTableVector(Vector<Contact> contactVector) {
 		Vector<Vector<String>> tableVector = new Vector<Vector<String>>();
@@ -19,5 +20,13 @@ public class Controller {
 			tableVector.add(intermediaryVector);
 		}
 		return tableVector;
+	}
+	
+	public void setView(View view) {
+		this.view = view;
+	}
+	
+	public void setSQL(SQL sql) {
+		this.connection = sql;
 	}
 }

@@ -11,10 +11,16 @@ public class SwingGUI implements View {
 	private JPanel buttonPanel;
 	private JPanel tablePanel;
 	
+	private JButton deleteContactButton;
 	private JButton newContactButton;
-	private JButton updateContactButton;
 	private JButton searchForContactButton;
+	private JButton updateContactButton;
 	private JButton viewAllContactsButton;
+	
+	
+	private Vector<Vector<String>> tableVector;
+	
+	private Controller controller;
 	
 	public SwingGUI() {
 		contactListWindow = new JFrame("Contact List");
@@ -23,9 +29,10 @@ public class SwingGUI implements View {
 		buttonPanel = new JPanel(new FlowLayout());
 		tablePanel = new JPanel();
 		
+		buttonPanel.add(deleteContactButton);
 		buttonPanel.add(newContactButton);
-		buttonPanel.add(updateContactButton);
 		buttonPanel.add(searchForContactButton);
+		buttonPanel.add(updateContactButton);
 		buttonPanel.add(viewAllContactsButton);
 		
 		contactListWindow.add(BorderLayout.NORTH, buttonPanel);
@@ -34,13 +41,11 @@ public class SwingGUI implements View {
 
 	@Override
 	public void setController(Controller controller) {
-		// TODO Auto-generated method stub
-		
+		this.controller = controller;
 	}
 
 	@Override
-	public Vector<Contact> getUpdatedContacts() {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateContacts(Vector<Vector<String>> tableVector) {
+		this.tableVector = tableVector;
 	}
 }
