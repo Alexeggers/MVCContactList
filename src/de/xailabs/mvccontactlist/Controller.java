@@ -1,5 +1,6 @@
 package de.xailabs.mvccontactlist;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Controller {
@@ -20,6 +21,11 @@ public class Controller {
 			tableVector.add(intermediaryVector);
 		}
 		return tableVector;
+	}
+	
+	public ArrayList<Contact> getUpdatedContactsFromSQL() {
+		ArrayList<Contact> contactArrayList = connection.getContacts();
+		return contactArrayList;
 	}
 	
 	public void setView(View view) {
