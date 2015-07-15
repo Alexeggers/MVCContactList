@@ -48,7 +48,11 @@ public class Contact {
 	}
 	
 	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+		if(phonenumber == null) {
+			this.phonenumber = "";
+		} else {
+			this.phonenumber = phonenumber;
+		}
 	}
 	
 	public void setNotes(String notes) {
