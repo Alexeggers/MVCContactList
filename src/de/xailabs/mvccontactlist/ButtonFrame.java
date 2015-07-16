@@ -18,14 +18,4 @@ public class ButtonFrame extends JFrame {
 	public ButtonFrame(String frameTitle) {
 		super(frameTitle);
 	}
-	
-	public ButtonFrame(Contact contact) {
-		this();
-		this.contact = contact;
-	}
-	
-	public ButtonFrame(String frameTitle, Contact contact) {
-		this(frameTitle);
-		this.contact = contact;
-	}
 }
