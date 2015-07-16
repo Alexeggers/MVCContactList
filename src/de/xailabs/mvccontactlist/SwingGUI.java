@@ -26,6 +26,8 @@ public class SwingGUI implements View {
 	private static Vector<String> columnNames = new Vector<String>();
 	private Vector<Vector<String>> tableVector;
 	
+	private Controller controller;
+	
 	@Override
 	public void buildGUI() {
 		columnNames.add("ID");
@@ -59,8 +61,29 @@ public class SwingGUI implements View {
 			}
 		});
 		searchForContactButton = new JButton("Search");
+		searchForContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonFrame searchForContactFrame = new ButtonFrame("Search for Contact");
+			}
+		});
 		updateContactButton = new JButton("Update Contact");
+		updateContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonFrame updateContactFrame = new ButtonFrame("Update Contact");
+			}
+		});
 		viewAllContactsButton = new JButton("View all Contacts/Refresh Table");
+		viewAllContactsButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		
 		buttonPanel.add(deleteContactButton);
 		buttonPanel.add(newContactButton);
@@ -83,4 +106,11 @@ public class SwingGUI implements View {
 	public void setTableVector(Vector<Vector<String>> tableVector) {
 		this.tableVector = tableVector;
 	}
+
+	@Override
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
+	
 }

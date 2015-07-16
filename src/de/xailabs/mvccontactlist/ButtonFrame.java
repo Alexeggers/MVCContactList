@@ -8,6 +8,7 @@ public class ButtonFrame extends JFrame {
 	
 	public ButtonFrame() {
 		super();
+		this.setBounds(200, 200, 400, 200);
 	}
 	
 	public ButtonFrame(String frameTitle) {

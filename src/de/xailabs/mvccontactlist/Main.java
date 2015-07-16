@@ -7,6 +7,8 @@ public class Main {
 		SwingGUI GUI = new SwingGUI();
 		SQL connection = new SQL();
 		Controller controller = new Controller(GUI, connection);
+		GUI.setController(controller);
 		GUI.buildGUI();
+		
 	}
 }
