@@ -47,10 +47,17 @@ public class SwingGUI implements View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame deleteContactFrame = new JFrame("Delete Contact");
+				
 			}
 		});
 		newContactButton = new JButton("New Contact");
+		newContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonFrame newContactFrame = new ButtonFrame("New Contact");
+			}
+		});
 		searchForContactButton = new JButton("Search");
 		updateContactButton = new JButton("Update Contact");
 		viewAllContactsButton = new JButton("View all Contacts/Refresh Table");
