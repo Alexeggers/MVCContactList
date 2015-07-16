@@ -29,6 +29,7 @@ public class Controller {
 			intermediaryVector.add(contact.getPhonenumber());
 			intermediaryVector.add(contact.getNotes());
 			tableVector.add(intermediaryVector);
+			System.out.println("lol");
 		}
 	}
 	
