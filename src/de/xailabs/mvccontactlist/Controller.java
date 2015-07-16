@@ -7,12 +7,22 @@ public class Controller {
 	
 	private SQL connection;
 	private View view;
+	ArrayList<Contact> contactContainer;
+	Vector<Vector<String>> tableVector;
 	
-	public Vector<Vector<String>> convertToTableVector(Vector<Contact> contactVector) {
-		Vector<Vector<String>> tableVector = new Vector<Vector<String>>();
+	public Controller(View view, SQL connection) {
+		this.view = view;
+		this.connection = connection;
+		getUpdatedContactsFromSQL();
+		convertToTableVector();
+		view.setTableVector(tableVector);
+	}
+	
+	public void convertToTableVector() {
+		tableVector = new Vector<Vector<String>>();
 		Vector<String> intermediaryVector;
 		
-		for(Contact contact : contactVector) {
+		for(Contact contact : contactContainer) {
 			intermediaryVector = new Vector<String>();
 			intermediaryVector.add(contact.getId());
 			intermediaryVector.add(contact.getName());
@@ -20,12 +30,10 @@ public class Controller {
 			intermediaryVector.add(contact.getNotes());
 			tableVector.add(intermediaryVector);
 		}
-		return tableVector;
 	}
 	
-	public ArrayList<Contact> getUpdatedContactsFromSQL() {
-		ArrayList<Contact> contactArrayList = connection.getContacts();
-		return contactArrayList;
+	public void getUpdatedContactsFromSQL() {
+		contactContainer = connection.getContacts();
 	}
 	
 	public void setView(View view) {
