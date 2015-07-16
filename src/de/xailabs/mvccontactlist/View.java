@@ -4,5 +4,6 @@ import java.util.Vector;
 
 
 public interface View {
-	public void updateContacts(Vector<Vector<String>> tableVector);
+	public void setTableVector(Vector<Vector<String>> tableVector);
+	public void buildGUI();
 }
