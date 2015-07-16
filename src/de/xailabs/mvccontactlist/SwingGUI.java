@@ -62,10 +62,6 @@ public class SwingGUI implements View {
 		contactListWindow.setVisible(true);
 	}
 
-	@Override
-	public void setController(Controller controller) {
-		this.controller = controller;
-	}
 
 	@Override
 	public void updateContacts(Vector<Vector<String>> tableVector) {
