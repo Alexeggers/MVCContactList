@@ -20,12 +20,18 @@ public class SwingGUI implements View {
 	private JButton updateContactButton;
 	private JButton viewAllContactsButton;
 	
+	JTable contactTable;
+	
 	
 	private Vector<Vector<String>> tableVector;
 	
-	private Controller controller;
 	
 	public SwingGUI() {
+		
+	}
+	
+	@Override
+	public void buildGUI() {
 		contactListWindow = new JFrame("Contact List");
 		contactListWindow.setLocationRelativeTo(null);
 		contactListWindow.setBackground(Color.WHITE);
@@ -55,6 +61,8 @@ public class SwingGUI implements View {
 		buttonPanel.add(updateContactButton);
 		buttonPanel.add(viewAllContactsButton);
 		
+		contactTable = new JTable();
+		
 		contactListWindow.add(BorderLayout.NORTH, buttonPanel);
 		contactListWindow.add(BorderLayout.CENTER, tablePanel);
 		
@@ -64,7 +72,7 @@ public class SwingGUI implements View {
 
 
 	@Override
-	public void updateContacts(Vector<Vector<String>> tableVector) {
+	public void setTableVector(Vector<Vector<String>> tableVector) {
 		this.tableVector = tableVector;
 	}
 }
