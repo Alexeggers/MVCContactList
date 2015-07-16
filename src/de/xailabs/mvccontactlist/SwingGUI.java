@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class SwingGUI implements View {
 	private JFrame contactListWindow;
@@ -20,18 +21,17 @@ public class SwingGUI implements View {
 	private JButton updateContactButton;
 	private JButton viewAllContactsButton;
 	
-	JTable contactTable;
+	private JTable contactTable;
 	
-	
+	private static Vector<String> columnNames = new Vector<String>();
 	private Vector<Vector<String>> tableVector;
-	
-	
-	public SwingGUI() {
-		
-	}
 	
 	@Override
 	public void buildGUI() {
+		columnNames.add("ID");
+		columnNames.add("Name");
+		columnNames.add("Phone Number");
+		columnNames.add("Notes");
 		contactListWindow = new JFrame("Contact List");
 		contactListWindow.setLocationRelativeTo(null);
 		contactListWindow.setBackground(Color.WHITE);
@@ -61,7 +61,9 @@ public class SwingGUI implements View {
 		buttonPanel.add(updateContactButton);
 		buttonPanel.add(viewAllContactsButton);
 		
-		contactTable = new JTable();
+		DefaultTableModel contactTableModel = new DefaultTableModel(tableVector, columnNames);
+		contactTable = new JTable(contactTableModel);
+		tablePanel.add(new JScrollPane(contactTable));
 		
 		contactListWindow.add(BorderLayout.NORTH, buttonPanel);
 		contactListWindow.add(BorderLayout.CENTER, tablePanel);
@@ -69,7 +71,6 @@ public class SwingGUI implements View {
 		contactListWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contactListWindow.setVisible(true);
 	}
-
 
 	@Override
 	public void setTableVector(Vector<Vector<String>> tableVector) {
