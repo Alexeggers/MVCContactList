@@ -27,7 +27,7 @@ public class SQL {
 		ArrayList<Contact> contacts = new ArrayList<Contact>();
 		try {
 			while(rs.next()) {
-				String id = Integer.toString(rs.getInt("ID"));
+				int id = rs.getInt("ID");
 				String name = rs.getString("Name");
 				String number = rs.getString("Phonenumber");
 				String notes = rs.getString("Notes");
@@ -51,7 +51,7 @@ public class SQL {
 		ArrayList<Contact> foundContacts = new ArrayList<Contact>();
 		try {
 			while(rs.next()) {
-				String id = Integer.toString(rs.getInt("ID"));
+				int id = rs.getInt("ID");
 				String name = rs.getString("Name");
 				String number = rs.getString("Phonenumber");
 				String notes = rs.getString("Notes");

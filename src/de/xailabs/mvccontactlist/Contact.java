@@ -1,12 +1,12 @@
 package de.xailabs.mvccontactlist;
 
 public class Contact {
-	private String id;
+	private int id;
 	private String name;
 	private String phonenumber;
 	private String notes;
 	
-	public Contact(String id, String name, String phonenumber, String notes) {
+	public Contact(int id, String name, String phonenumber, String notes) {
 		this.id = id;
 		this.name = name;
 		this.phonenumber = phonenumber;
@@ -19,7 +19,7 @@ public class Contact {
 		this.notes = notes;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
@@ -35,12 +35,8 @@ public class Contact {
 		return notes;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
-	}
-	
 	public void setId(int id) {
-		this.id = Integer.toString(id);
+		this.id = id;
 	}
 	
 	public void setName(String name) {

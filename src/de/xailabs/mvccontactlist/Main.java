@@ -9,6 +9,5 @@ public class Main {
 		Controller controller = new Controller(GUI, connection);
 		GUI.setController(controller);
 		GUI.buildGUI();
-		
 	}
 }

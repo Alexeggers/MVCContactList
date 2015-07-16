@@ -24,7 +24,7 @@ public class Controller {
 		
 		for(Contact contact : contactContainer) {
 			intermediaryVector = new Vector<String>();
-			intermediaryVector.add(contact.getId());
+			intermediaryVector.add(String.valueOf(contact.getId()));
 			intermediaryVector.add(contact.getName());
 			intermediaryVector.add(contact.getPhonenumber());
 			intermediaryVector.add(contact.getNotes());
@@ -43,4 +43,9 @@ public class Controller {
 	public void setSQL(SQL sql) {
 		this.connection = sql;
 	}
+	
+	public void updateTableData(Vector<Vector<String>> tableVector) {
+		view.setTableVector(tableVector);
+	}
+	
 }
