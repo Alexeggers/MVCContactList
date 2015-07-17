@@ -108,13 +108,8 @@ public class SwingGUI implements View {
 			}
 		});
 		newContactButton = new JButton("New Contact");
-		newContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonFrame newContactFrame = new ButtonFrame("New Contact");
-			}
-		});
+		newContactButton.addActionListener(new newContactSubclass());
+		
 		searchForContactButton = new JButton("Search");
 		searchForContactButton.addActionListener(new ActionListener() {
 			
@@ -146,6 +141,15 @@ public class SwingGUI implements View {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			NewContactWindow newContactWindow = new NewContactWindow(contactListWindow, controller);
+		}
+	}
+	
+	private class updateContactSubclass implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
 			
 		}
 		
