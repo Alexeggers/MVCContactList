@@ -48,50 +48,7 @@ public class SwingGUI implements View {
 		tablePanel = new JPanel();
 		tablePanel.setBackground(Color.WHITE);
 		
-		deleteContactButton = new JButton("Delete Contact");
-		deleteContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(contactTable.getSelectedRow() != -1) {
-					controller.deleteContact(buildSelectedContact());
-					refreshTable(tableData);
-				}
-			}
-		});
-		newContactButton = new JButton("New Contact");
-		newContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonFrame newContactFrame = new ButtonFrame("New Contact");
-			}
-		});
-		searchForContactButton = new JButton("Search");
-		searchForContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonFrame searchForContactFrame = new ButtonFrame("Search for Contact");
-			}
-		});
-		updateContactButton = new JButton("Update Contact");
-		updateContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonFrame updateContactFrame = new ButtonFrame("Update Contact");
-			}
-		});
-		viewAllContactsButton = new JButton("View all Contacts/Refresh Table");
-		viewAllContactsButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controller.updateView();
-				refreshTable(tableData);
-			}
-		});
+		buildButtons();
 		
 		buttonPanel.add(newContactButton);
 		buttonPanel.add(searchForContactButton);
@@ -136,5 +93,61 @@ public class SwingGUI implements View {
 		contactTable.setBackground(Color.WHITE);
 		JScrollPane tableContainer = new JScrollPane(contactTable);
 		tablePanel.add(tableContainer);
+	}
+	
+	public void buildButtons() {
+		deleteContactButton = new JButton("Delete Contact");
+		deleteContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(contactTable.getSelectedRow() != -1) {
+					controller.deleteContact(buildSelectedContact());
+					refreshTable(tableData);
+				}
+			}
+		});
+		newContactButton = new JButton("New Contact");
+		newContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonFrame newContactFrame = new ButtonFrame("New Contact");
+			}
+		});
+		searchForContactButton = new JButton("Search");
+		searchForContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonFrame searchForContactFrame = new ButtonFrame("Search for Contact");
+			}
+		});
+		updateContactButton = new JButton("Update Contact");
+		updateContactButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonFrame updateContactFrame = new ButtonFrame("Update Contact");
+			}
+		});
+		viewAllContactsButton = new JButton("View all Contacts/Refresh Table");
+		viewAllContactsButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.updateView();
+				refreshTable(tableData);
+			}
+		});
+	}
+	
+	private class newContactSubclass implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+		
 	}
 }
