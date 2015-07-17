@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 
 public class SwingGUI implements View {
 	private JFrame contactListWindow;
+	
 	private JPanel buttonPanel;
 	private JPanel tablePanel;
 	
@@ -52,8 +53,10 @@ public class SwingGUI implements View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.deleteContact(buildSelectedContact());
-				refreshTable(tableData);
+				if(contactTable.getSelectedRow() != -1) {
+					controller.deleteContact(buildSelectedContact());
+					refreshTable(tableData);
+				}
 			}
 		});
 		newContactButton = new JButton("New Contact");
@@ -62,7 +65,6 @@ public class SwingGUI implements View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonFrame newContactFrame = new ButtonFrame("New Contact");
-				
 			}
 		});
 		searchForContactButton = new JButton("Search");
@@ -86,7 +88,8 @@ public class SwingGUI implements View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				controller.updateView();
+				refreshTable(tableData);
 			}
 		});
 		

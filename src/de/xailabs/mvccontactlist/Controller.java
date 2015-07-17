@@ -13,9 +13,7 @@ public class Controller {
 	public Controller(View view, SQL connection) {
 		this.view = view;
 		this.connection = connection;
-		getUpdatedContactsFromSQL();
-		convertToTableVector();
-		updateTableData(tableVector);
+		updateView();
 	}
 	
 	public void convertToTableVector() {
@@ -46,13 +44,16 @@ public class Controller {
 	
 	public void deleteContact(Contact contact) {
 		connection.deleteContact(contact);
-		getUpdatedContactsFromSQL();
-		convertToTableVector();
-		updateTableData(tableVector);
+		updateView();
 	}
 	
 	public void updateTableData(Vector<Vector<String>> tableVector) {
 		view.setTableData(tableVector);
 	}
 	
+	public void updateView() {
+		getUpdatedContactsFromSQL();
+		convertToTableVector();
+		updateTableData(tableVector);
+	}
 }
