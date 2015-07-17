@@ -23,7 +23,7 @@ public class SwingGUI implements View {
 	private JButton updateContactButton;
 	private JButton viewAllContactsButton;
 	
-	private JTable contactTable;
+	private ContactTable contactTable;
 	private DefaultTableModel contactTableModel;
 	
 	private static Vector<String> columnNames = new Vector<String>();
@@ -52,11 +52,8 @@ public class SwingGUI implements View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = contactTable.getSelectedRow();
-				Contact contact = new Contact(Integer.parseInt(tableData.get(selectedRow).get(0)), 
-							tableData.get(selectedRow).get(1), tableData.get(selectedRow).get(2), 
-							tableData.get(selectedRow).get(3));
-				controller.deleteContact(contact);
+				controller.deleteContact(buildSelectedContact());
+				refreshTable(tableData);
 			}
 		});
 		newContactButton = new JButton("New Contact");
@@ -93,14 +90,14 @@ public class SwingGUI implements View {
 			}
 		});
 		
-		buttonPanel.add(deleteContactButton);
 		buttonPanel.add(newContactButton);
 		buttonPanel.add(searchForContactButton);
 		buttonPanel.add(updateContactButton);
+		buttonPanel.add(deleteContactButton);
 		buttonPanel.add(viewAllContactsButton);
 		
 		contactTableModel = new DefaultTableModel(tableData, columnNames);
-		contactTable = new JTable(contactTableModel);
+		contactTable = new ContactTable(contactTableModel);
 		tablePanel.add(new JScrollPane(contactTable));
 		
 		contactListWindow.add(BorderLayout.NORTH, buttonPanel);
@@ -118,6 +115,14 @@ public class SwingGUI implements View {
 	@Override
 	public void setController(Controller controller) {
 		this.controller = controller;
+	}
+	
+	public Contact buildSelectedContact() {
+		int selectedRow = contactTable.getSelectedRow();
+		Contact contact = new Contact(Integer.parseInt(tableData.get(selectedRow).get(0)), 
+				tableData.get(selectedRow).get(1), tableData.get(selectedRow).get(2), 
+				tableData.get(selectedRow).get(3));
+		return contact;
 	}
 	
 	public void refreshTable(Vector<Vector<String>> dataVector) {
