@@ -7,15 +7,15 @@ public class Controller {
 	
 	private SQL connection;
 	private View view;
-	ArrayList<Contact> contactContainer;
-	Vector<Vector<String>> tableVector;
+	private ArrayList<Contact> contactContainer;
+	private Vector<Vector<String>> tableVector;
 	
 	public Controller(View view, SQL connection) {
 		this.view = view;
 		this.connection = connection;
 		getUpdatedContactsFromSQL();
 		convertToTableVector();
-		view.setTableVector(tableVector);
+		updateTableData(tableVector);
 	}
 	
 	public void convertToTableVector() {
@@ -38,14 +38,21 @@ public class Controller {
 	
 	public void setView(View view) {
 		this.view = view;
-	}
+	} 
 	
 	public void setSQL(SQL sql) {
 		this.connection = sql;
 	}
 	
+	public void deleteContact(Contact contact) {
+		connection.deleteContact(contact);
+		getUpdatedContactsFromSQL();
+		convertToTableVector();
+		updateTableData(tableVector);
+	}
+	
 	public void updateTableData(Vector<Vector<String>> tableVector) {
-		view.setTableVector(tableVector);
+		view.setTableData(tableVector);
 	}
 	
 }

@@ -9,6 +9,8 @@ import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 
 public class SwingGUI implements View {
 	private JFrame contactListWindow;
@@ -22,9 +24,10 @@ public class SwingGUI implements View {
 	private JButton viewAllContactsButton;
 	
 	private JTable contactTable;
+	private DefaultTableModel contactTableModel;
 	
 	private static Vector<String> columnNames = new Vector<String>();
-	private Vector<Vector<String>> tableVector;
+	private Vector<Vector<String>> tableData;
 	
 	private Controller controller;
 	
@@ -49,7 +52,11 @@ public class SwingGUI implements View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				int selectedRow = contactTable.getSelectedRow();
+				Contact contact = new Contact(Integer.parseInt(tableData.get(selectedRow).get(0)), 
+							tableData.get(selectedRow).get(1), tableData.get(selectedRow).get(2), 
+							tableData.get(selectedRow).get(3));
+				controller.deleteContact(contact);
 			}
 		});
 		newContactButton = new JButton("New Contact");
@@ -58,6 +65,7 @@ public class SwingGUI implements View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonFrame newContactFrame = new ButtonFrame("New Contact");
+				
 			}
 		});
 		searchForContactButton = new JButton("Search");
@@ -91,7 +99,7 @@ public class SwingGUI implements View {
 		buttonPanel.add(updateContactButton);
 		buttonPanel.add(viewAllContactsButton);
 		
-		DefaultTableModel contactTableModel = new DefaultTableModel(tableVector, columnNames);
+		contactTableModel = new DefaultTableModel(tableData, columnNames);
 		contactTable = new JTable(contactTableModel);
 		tablePanel.add(new JScrollPane(contactTable));
 		
@@ -103,12 +111,22 @@ public class SwingGUI implements View {
 	}
 
 	@Override
-	public void setTableVector(Vector<Vector<String>> tableVector) {
-		this.tableVector = tableVector;
+	public void setTableData(Vector<Vector<String>> tableVector) {
+		this.tableData = tableVector;
 	}
 
 	@Override
 	public void setController(Controller controller) {
 		this.controller = controller;
+	}
+	
+	public void refreshTable(Vector<Vector<String>> dataVector) {
+		tablePanel.removeAll();
+		tablePanel.revalidate();
+		TableModel contactModel = new DefaultTableModel(dataVector, columnNames);
+		contactTable = new ContactTable(contactModel);
+		contactTable.setBackground(Color.WHITE);
+		JScrollPane tableContainer = new JScrollPane(contactTable);
+		tablePanel.add(tableContainer);
 	}
 }
