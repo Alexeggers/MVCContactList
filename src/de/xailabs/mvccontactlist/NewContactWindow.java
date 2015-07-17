@@ -24,7 +24,7 @@ public class NewContactWindow {
 	Instruction instructions;
 	Contact contact;
 	
-	public NewContactWindow(JFrame superFrame, JPanel contactView) {
+	public NewContactWindow(JFrame superFrame, Controller controller) {
 		frame = new JFrame("New Contact");
 		instructions = new Instruction("Enter new contact information", 20);
 		frame.setLocationRelativeTo(superFrame);
@@ -59,6 +59,7 @@ public class NewContactWindow {
 				String number = numberField.getText();
 				String notes = notesField.getText();
 				contact = new Contact(name, number, notes);
+				controller.newContact(contact);
 				frame.setVisible(false);
 				frame.dispose();
 			}
