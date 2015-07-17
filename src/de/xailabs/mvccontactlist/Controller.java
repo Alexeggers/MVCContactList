@@ -32,20 +32,6 @@ public class Controller {
 		}
 	}
 	
-	public void convertToTableVector(ArrayList<Contact> foundContacts) {
-		tableVector = new Vector<Vector<String>>();
-		Vector<String> intermediaryVector;
-		
-		for(Contact contact : foundContacts) {
-			intermediaryVector = new Vector<String>();
-			intermediaryVector.add(String.valueOf(contact.getId()));
-			intermediaryVector.add(contact.getName());
-			intermediaryVector.add(contact.getPhonenumber());
-			intermediaryVector.add(contact.getNotes());
-			tableVector.add(intermediaryVector);
-		}
-	}
-	
 	public void getUpdatedContactsFromSQL() {
 		contactContainer = connection.getContacts();
 	}
@@ -85,7 +71,7 @@ public class Controller {
 	}
 	
 	public void searchContact(String searchParameter) {
-		ArrayList<Contact> foundContacts = connection.searchForContact(searchParameter);
+		contactContainer = connection.searchForContact(searchParameter);
 		convertToTableVector();
 		updateTableData(tableVector);
 		view.refreshTable(tableVector);

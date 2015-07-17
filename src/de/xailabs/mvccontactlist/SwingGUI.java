@@ -108,24 +108,14 @@ public class SwingGUI implements View {
 			}
 		});
 		newContactButton = new JButton("New Contact");
-		newContactButton.addActionListener(new newContactSubclass());
+		newContactButton.addActionListener(new NewContactSubclass());
 		
 		searchForContactButton = new JButton("Search");
-		searchForContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonFrame searchForContactFrame = new ButtonFrame("Search for Contact");
-			}
-		});
+		searchForContactButton.addActionListener(new SearchForContactSubclass());
+		
 		updateContactButton = new JButton("Update Contact");
-		updateContactButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonFrame updateContactFrame = new ButtonFrame("Update Contact");
-			}
-		});
+		updateContactButton.addActionListener(new UpdateContactSubclass());
+		
 		viewAllContactsButton = new JButton("View all Contacts/Refresh Table");
 		viewAllContactsButton.addActionListener(new ActionListener() {
 			
@@ -137,7 +127,7 @@ public class SwingGUI implements View {
 		});
 	}
 	
-	private class newContactSubclass implements ActionListener {
+	private class NewContactSubclass implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -145,13 +135,21 @@ public class SwingGUI implements View {
 		}
 	}
 	
-	private class updateContactSubclass implements ActionListener {
+	private class SearchForContactSubclass implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			SearchForContactWindow searchWindow = new SearchForContactWindow(contactListWindow, controller);
 		}
-		
+	}
+	
+	private class UpdateContactSubclass implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(contactTable.getSelectedRow() != -1) {
+				UpdateContactWindow updateWindow = new UpdateContactWindow(contactListWindow, controller, contactTable.getSelectedRow(), tableData);
+			}
+		}
 	}
 }

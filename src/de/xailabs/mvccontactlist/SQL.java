@@ -61,7 +61,6 @@ public class SQL {
 		} catch(SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 		}
-		System.out.println("hi");
 		return foundContacts;
 	}
 	
@@ -79,15 +78,15 @@ public class SQL {
 	
 	public void updateContact(Contact contact) {
 		StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE CONTACTS SET Name = '");
-			sb.append(contact.getName());
-			sb.append("', Phonenumber = '");
-			sb.append(contact.getPhonenumber());
-			sb.append("', Notes = '");
-			sb.append(contact.getNotes());
-			sb.append("' WHERE ID = ");
-			sb.append(contact.getId());
-			executeUpdate(sb.toString());
+		sb.append("UPDATE CONTACTS SET Name = '");
+		sb.append(contact.getName());
+		sb.append("', Phonenumber = '");
+		sb.append(contact.getPhonenumber());
+		sb.append("', Notes = '");
+		sb.append(contact.getNotes());
+		sb.append("' WHERE ID = ");
+		sb.append(contact.getId());
+		executeUpdate(sb.toString());
 	}
 	
 	public boolean deleteContact(Contact contact) {
