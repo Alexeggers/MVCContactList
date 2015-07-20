@@ -41,14 +41,6 @@ public class Controller {
 		return dataVector;
 	}
 
-	public void setView(SwingGUI view) {
-		this.view = view;
-	}
-
-	public void setSQL(SQL sql) {
-		this.connection = sql;
-	}
-
 	public void deleteContact(Contact contact) {
 		connection.deleteContact(contact);
 		updateView();
