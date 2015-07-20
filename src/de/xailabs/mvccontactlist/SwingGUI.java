@@ -11,58 +11,58 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
 public class SwingGUI implements View {
 	private JFrame contactListWindow;
-	
+
 	private JPanel buttonPanel;
 	private JPanel tablePanel;
-	
+
 	private JButton deleteContactButton;
 	private JButton newContactButton;
 	private JButton searchForContactButton;
 	private JButton updateContactButton;
 	private JButton viewAllContactsButton;
-	
+
 	private ContactTable contactTable;
-	private DefaultTableModel contactTableModel;
-	
-	private static Vector<String> columnNames = new Vector<String>();
+
+	private static Vector<String> columnNames;
 	private Vector<Vector<String>> tableData;
-	
+
 	private Controller controller;
-	
-	@Override
-	public void buildGUI() {
+
+	static {
+		columnNames = new Vector<String>();
 		columnNames.add("ID");
 		columnNames.add("Name");
 		columnNames.add("Phone Number");
 		columnNames.add("Notes");
+	}
+
+	@Override
+	public void buildGUI() {
 		contactListWindow = new JFrame("Contact List");
 		contactListWindow.setLocationRelativeTo(null);
 		contactListWindow.setBackground(Color.WHITE);
 		contactListWindow.setBounds(0, 0, 1024, 768);
-		
+
 		buttonPanel = new JPanel(new FlowLayout());
 		buttonPanel.setBackground(Color.WHITE);
 		tablePanel = new JPanel();
 		tablePanel.setBackground(Color.WHITE);
-		
+
 		buildButtons();
-		
+
 		buttonPanel.add(newContactButton);
 		buttonPanel.add(searchForContactButton);
 		buttonPanel.add(updateContactButton);
 		buttonPanel.add(deleteContactButton);
 		buttonPanel.add(viewAllContactsButton);
-		
-		contactTableModel = new DefaultTableModel(tableData, columnNames);
-		contactTable = new ContactTable(contactTableModel);
-		tablePanel.add(new JScrollPane(contactTable));
-		
+
+		refreshTable();
+
 		contactListWindow.add(BorderLayout.NORTH, buttonPanel);
 		contactListWindow.add(BorderLayout.CENTER, tablePanel);
-		
+
 		contactListWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contactListWindow.setVisible(true);
 	}
@@ -76,16 +76,17 @@ public class SwingGUI implements View {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-	
+
 	public Contact buildSelectedContact() {
 		int selectedRow = contactTable.getSelectedRow();
-		Contact contact = new Contact(Integer.parseInt(tableData.get(selectedRow).get(0)), 
-				tableData.get(selectedRow).get(1), tableData.get(selectedRow).get(2), 
-				tableData.get(selectedRow).get(3));
+		Contact contact = new Contact(Integer.parseInt(tableData.get(
+				selectedRow).get(0)), tableData.get(selectedRow).get(1),
+				tableData.get(selectedRow).get(2), tableData.get(selectedRow).get(3));
 		return contact;
 	}
-	
+
 	public void refreshTable() {
+		
 		tablePanel.removeAll();
 		tablePanel.revalidate();
 		TableModel contactModel = new DefaultTableModel(tableData, columnNames);
@@ -94,14 +95,14 @@ public class SwingGUI implements View {
 		JScrollPane tableContainer = new JScrollPane(contactTable);
 		tablePanel.add(tableContainer);
 	}
-	
+
 	public void buildButtons() {
 		deleteContactButton = new JButton("Delete Contact");
 		deleteContactButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(contactTable.getSelectedRow() != -1) {
+				if (contactTable.getSelectedRow() != -1) {
 					controller.deleteContact(buildSelectedContact());
 					refreshTable();
 				}
@@ -109,16 +110,17 @@ public class SwingGUI implements View {
 		});
 		newContactButton = new JButton("New Contact");
 		newContactButton.addActionListener(new NewContactSubclass());
-		
+
 		searchForContactButton = new JButton("Search");
-		searchForContactButton.addActionListener(new SearchForContactSubclass());
-		
+		searchForContactButton
+				.addActionListener(new SearchForContactSubclass());
+
 		updateContactButton = new JButton("Update Contact");
 		updateContactButton.addActionListener(new UpdateContactSubclass());
-		
+
 		viewAllContactsButton = new JButton("View all Contacts/Refresh Table");
 		viewAllContactsButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.updateView();
@@ -126,32 +128,36 @@ public class SwingGUI implements View {
 			}
 		});
 	}
-	
+
 	private class NewContactSubclass implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
-			NewContactWindow newContactWindow = new NewContactWindow(contactListWindow, controller);
+			NewContactWindow newContactWindow = new NewContactWindow(
+					contactListWindow, controller);
 		}
 	}
-	
+
 	private class SearchForContactSubclass implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
-			SearchForContactWindow searchWindow = new SearchForContactWindow(contactListWindow, controller);
+			SearchForContactWindow searchWindow = new SearchForContactWindow(
+					contactListWindow, controller);
 		}
 	}
-	
+
 	private class UpdateContactSubclass implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(contactTable.getSelectedRow() != -1) {
+			if (contactTable.getSelectedRow() != -1) {
 				@SuppressWarnings("unused")
-				UpdateContactWindow updateWindow = new UpdateContactWindow(contactListWindow, controller, contactTable.getSelectedRow(), tableData);
+				UpdateContactWindow updateWindow = new UpdateContactWindow(
+						contactListWindow, controller,
+						contactTable.getSelectedRow(), tableData);
 			}
 		}
 	}

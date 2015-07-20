@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SQL {
 	
@@ -22,7 +23,7 @@ public class SQL {
 	    }
 	}
 	
-	public ArrayList<Contact> getContacts() {
+	public List<Contact> getContacts() {
 		ResultSet rs = executeQuery("SELECT * FROM CONTACTS;");
 		ArrayList<Contact> contacts = new ArrayList<Contact>();
 		try {

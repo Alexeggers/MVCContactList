@@ -1,29 +1,36 @@
 package de.xailabs.mvccontactlist;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class Controller {
-	
+
 	private SQL connection;
 	private SwingGUI view;
-	
+
 	public Controller(SwingGUI view, SQL connection) {
 		this.view = view;
 		this.connection = connection;
-	}
-	
-	public void start() {
 		view.setController(this);
-		convertToTableVector(connection.getContacts());
+	}
+
+	public void start() {
+		setTableData();
 		view.buildGUI();
 	}
-	
-	public void convertToTableVector(ArrayList<Contact> dataArrayList) {
+
+	private void setTableData() {
+
+		Vector<Vector<String>> dataVector = convertToTableVector(connection
+				.getContacts());
+		view.setTableData(dataVector);
+	}
+
+	private Vector<Vector<String>> convertToTableVector(List<Contact> contactList) {
 		Vector<Vector<String>> dataVector = new Vector<Vector<String>>();
-		Vector<String> intermediaryVector; 
-		
-		for(Contact contact : dataArrayList) {
+		Vector<String> intermediaryVector;
+
+		for (Contact contact : contactList) {
 			intermediaryVector = new Vector<String>();
 			intermediaryVector.add(String.valueOf(contact.getId()));
 			intermediaryVector.add(contact.getName());
@@ -31,40 +38,40 @@ public class Controller {
 			intermediaryVector.add(contact.getNotes());
 			dataVector.add(intermediaryVector);
 		}
-		view.setTableData(dataVector);
+		return dataVector;
 	}
-	
+
 	public void setView(SwingGUI view) {
 		this.view = view;
-	} 
-	
+	}
+
 	public void setSQL(SQL sql) {
 		this.connection = sql;
 	}
-	
+
 	public void deleteContact(Contact contact) {
 		connection.deleteContact(contact);
 		updateView();
 	}
-		
+
 	public void updateView() {
-		convertToTableVector(connection.getContacts());
+		setTableData();
 		view.refreshTable();
 	}
-	
+
 	public void newContact(Contact contact) {
 		connection.addNewContact(contact);
 		updateView();
 	}
-	
+
 	public void updateContact(Contact contact) {
 		connection.updateContact(contact);
 		updateView();
 	}
-	
+
 	public void searchContact(String searchParameter) {
 		connection.searchForContact(searchParameter);
-		convertToTableVector(connection.searchForContact(searchParameter));
+		view.setTableData(convertToTableVector(connection.searchForContact(searchParameter)));
 		view.refreshTable();
 	}
 }
