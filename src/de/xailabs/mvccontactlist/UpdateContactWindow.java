@@ -22,15 +22,15 @@ public class UpdateContactWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -6397653614766456939L;
-	int id;
-	String defaultName;
-	String defaultNumber;
-	String defaultNotes;
-	JFrame frame;
-	JTextField nameField;
-	JTextField numberField;
-	JTextField notesField;
-	ContactTable returnTable;
+	private int id;
+	private String defaultName;
+	private String defaultNumber;
+	private String defaultNotes;
+	private JFrame frame;
+	private JTextField nameField;
+	private JTextField numberField;
+	private JTextField notesField;
+	private ContactTable returnTable;
 	
 	public UpdateContactWindow(JFrame contactListWindow, Controller controller, int selectedRow, Vector<Vector<String>> tableData) {
 		Vector<String> dataVector = tableData.get(selectedRow);

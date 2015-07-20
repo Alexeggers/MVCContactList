@@ -18,8 +18,8 @@ import org.jdesktop.xswingx.PromptSupport;
 
 public class SearchForContactWindow {
 	
-	JTextField searchField;
-	Instruction instructions;
+	private JTextField searchField;
+	private Instruction instructions;
 	
 	public SearchForContactWindow(JFrame contactListWindow, Controller controller) {
 		JFrame frame = new JFrame();

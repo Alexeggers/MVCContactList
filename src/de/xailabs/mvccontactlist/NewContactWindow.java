@@ -17,12 +17,12 @@ import org.jdesktop.xswingx.PromptSupport;
 
 
 public class NewContactWindow {
-	JTextField nameField;
-	JTextField numberField;
-	JTextField notesField;
-	JFrame frame;
-	Instruction instructions;
-	Contact contact;
+	private JTextField nameField;
+	private JTextField numberField;
+	private JTextField notesField;
+	private JFrame frame;
+	private Instruction instructions;
+	private Contact contact;
 	
 	public NewContactWindow(JFrame superFrame, Controller controller) {
 		frame = new JFrame("New Contact");
