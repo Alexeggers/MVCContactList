@@ -9,6 +9,7 @@ public class Instruction extends JTextField {
 	 * 
 	 */
 	private static final long serialVersionUID = -8560986966516913115L;
+	
 	public Instruction (String text, int columns) {
 		super(text, columns);
 		this.setEditable(false);

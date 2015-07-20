@@ -8,7 +8,6 @@ public class ButtonFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -6074235324460299227L;
-	Contact contact;
 	
 	public ButtonFrame() {
 		super();
