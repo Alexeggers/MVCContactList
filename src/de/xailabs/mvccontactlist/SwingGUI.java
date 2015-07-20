@@ -85,10 +85,10 @@ public class SwingGUI implements View {
 		return contact;
 	}
 	
-	public void refreshTable(Vector<Vector<String>> dataVector) {
+	public void refreshTable() {
 		tablePanel.removeAll();
 		tablePanel.revalidate();
-		TableModel contactModel = new DefaultTableModel(dataVector, columnNames);
+		TableModel contactModel = new DefaultTableModel(tableData, columnNames);
 		contactTable = new ContactTable(contactModel);
 		contactTable.setBackground(Color.WHITE);
 		JScrollPane tableContainer = new JScrollPane(contactTable);
@@ -103,7 +103,7 @@ public class SwingGUI implements View {
 			public void actionPerformed(ActionEvent e) {
 				if(contactTable.getSelectedRow() != -1) {
 					controller.deleteContact(buildSelectedContact());
-					refreshTable(tableData);
+					refreshTable();
 				}
 			}
 		});
@@ -122,7 +122,7 @@ public class SwingGUI implements View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.updateView();
-				refreshTable(tableData);
+				refreshTable();
 			}
 		});
 	}
@@ -131,6 +131,7 @@ public class SwingGUI implements View {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("unused")
 			NewContactWindow newContactWindow = new NewContactWindow(contactListWindow, controller);
 		}
 	}
@@ -139,6 +140,7 @@ public class SwingGUI implements View {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("unused")
 			SearchForContactWindow searchWindow = new SearchForContactWindow(contactListWindow, controller);
 		}
 	}
@@ -148,6 +150,7 @@ public class SwingGUI implements View {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(contactTable.getSelectedRow() != -1) {
+				@SuppressWarnings("unused")
 				UpdateContactWindow updateWindow = new UpdateContactWindow(contactListWindow, controller, contactTable.getSelectedRow(), tableData);
 			}
 		}

@@ -30,7 +30,6 @@ public class UpdateContactWindow extends JFrame {
 	private JTextField nameField;
 	private JTextField numberField;
 	private JTextField notesField;
-	private ContactTable returnTable;
 	
 	public UpdateContactWindow(JFrame contactListWindow, Controller controller, int selectedRow, Vector<Vector<String>> tableData) {
 		Vector<String> dataVector = tableData.get(selectedRow);

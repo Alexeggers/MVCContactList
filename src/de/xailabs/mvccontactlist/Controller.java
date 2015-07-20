@@ -7,33 +7,31 @@ public class Controller {
 	
 	private SQL connection;
 	private SwingGUI view;
-	private ArrayList<Contact> contactContainer;
-	private Vector<Vector<String>> tableVector;
 	
 	public Controller(SwingGUI view, SQL connection) {
 		this.view = view;
 		this.connection = connection;
-		getUpdatedContactsFromSQL();
-		convertToTableVector();
-		updateTableData(tableVector);
 	}
 	
-	public void convertToTableVector() {
-		tableVector = new Vector<Vector<String>>();
-		Vector<String> intermediaryVector;
+	public void start() {
+		view.setController(this);
+		convertToTableVector(connection.getContacts());
+		view.buildGUI();
+	}
+	
+	public void convertToTableVector(ArrayList<Contact> dataArrayList) {
+		Vector<Vector<String>> dataVector = new Vector<Vector<String>>();
+		Vector<String> intermediaryVector; 
 		
-		for(Contact contact : contactContainer) {
+		for(Contact contact : dataArrayList) {
 			intermediaryVector = new Vector<String>();
 			intermediaryVector.add(String.valueOf(contact.getId()));
 			intermediaryVector.add(contact.getName());
 			intermediaryVector.add(contact.getPhonenumber());
 			intermediaryVector.add(contact.getNotes());
-			tableVector.add(intermediaryVector);
+			dataVector.add(intermediaryVector);
 		}
-	}
-	
-	public void getUpdatedContactsFromSQL() {
-		contactContainer = connection.getContacts();
+		view.setTableData(dataVector);
 	}
 	
 	public void setView(SwingGUI view) {
@@ -48,16 +46,10 @@ public class Controller {
 		connection.deleteContact(contact);
 		updateView();
 	}
-	
-	public void updateTableData(Vector<Vector<String>> tableVector) {
-		view.setTableData(tableVector);
-	}
-	
+		
 	public void updateView() {
-		getUpdatedContactsFromSQL();
-		convertToTableVector();
-		updateTableData(tableVector);
-		view.refreshTable(tableVector);
+		convertToTableVector(connection.getContacts());
+		view.refreshTable();
 	}
 	
 	public void newContact(Contact contact) {
@@ -71,9 +63,8 @@ public class Controller {
 	}
 	
 	public void searchContact(String searchParameter) {
-		contactContainer = connection.searchForContact(searchParameter);
-		convertToTableVector();
-		updateTableData(tableVector);
-		view.refreshTable(tableVector);
+		connection.searchForContact(searchParameter);
+		convertToTableVector(connection.searchForContact(searchParameter));
+		view.refreshTable();
 	}
 }
